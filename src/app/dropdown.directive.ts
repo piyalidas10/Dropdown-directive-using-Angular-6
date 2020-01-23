@@ -1,4 +1,4 @@
-import { Directive, HostListener, ElementRef, Renderer2, AfterViewInit, Input, OnChanges } from '@angular/core';
+import { Directive, HostListener, ElementRef, Renderer2, AfterViewInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 
 @Directive({
   selector: '[appDropdown]'
@@ -8,6 +8,7 @@ export class DropdownDirective implements AfterViewInit, OnChanges {
   focusElementLi: any;
   currentFocusableIndex: any;
   selectedOptionText: any;
+  @Output() selectedOptionChange = new EventEmitter<any>();
 
   constructor(private el: ElementRef, private ren: Renderer2) { }
 
@@ -94,7 +95,7 @@ export class DropdownDirective implements AfterViewInit, OnChanges {
   ngOnChanges() {
     console.log('chooseOption => ', this.chooseOption);
     if (this.chooseOption !== undefined) {
-      this.selectedOptionText.innerText = this.chooseOption.name;
+      this.selectedOptionText.innerText = this.chooseOption;
     }
   }
 
@@ -141,6 +142,7 @@ export class DropdownDirective implements AfterViewInit, OnChanges {
       focusableLists[this.currentFocusableIndex + 1].focus();
       this.currentFocusableIndex ++;
       this.changeSelectedText(focusableLists[this.currentFocusableIndex].innerText);
+      this.selectedOptionChange.emit(focusableLists[this.currentFocusableIndex].innerText);
     }
   }
 
@@ -151,6 +153,7 @@ export class DropdownDirective implements AfterViewInit, OnChanges {
       focusableLists[this.currentFocusableIndex - 1].focus();
       this.currentFocusableIndex --;
       this.changeSelectedText(focusableLists[this.currentFocusableIndex].innerText);
+      this.selectedOptionChange.emit(focusableLists[this.currentFocusableIndex].innerText);
     }
   }
 

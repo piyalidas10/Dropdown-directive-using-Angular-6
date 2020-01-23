@@ -1,6 +1,6 @@
 <div class="container">
   <div class="col-12 col-lg-4 offset-lg-5 col-md-4 offset-md-4 col-sm-6 offset-sm-3">
-    <div class="select-box" appDropdown [chooseOption] = "chooseOpt">
+    <div class="select-box" appDropdown [chooseOption] = "chooseOptName" (selectedOptionChange)="fetchSelectedValue($event)">
       <div class="select-box__value">
         <input class="select-box__input" type="radio" value="{{countrydata[0].abbreviation}}" name="{{countrydata[0].abbreviation}}"
           checked="checked">
@@ -13,6 +13,6 @@
         </li>
       </ul>
     </div>
-    <h4 *ngIf="selectOptName !== undefined">You have selected {{selectOptName}}</h4>
+    <h4 *ngIf="chooseOptName !== undefined">You have selected {{chooseOptName}}</h4>
   </div>
 </div>

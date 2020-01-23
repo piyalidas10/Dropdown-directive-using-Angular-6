@@ -65,7 +65,6 @@ export class AppComponent implements OnChanges, OnInit {
         ];
     }
     ngOnChanges() {
-
     }
     ngOnInit() {
         console.log('countrydata => ', this.countrydata);
@@ -73,5 +72,11 @@ export class AppComponent implements OnChanges, OnInit {
     setChooseOption(opt) {
       this.chooseOpt = opt;
       this.chooseOptName = opt.name;
+      console.log('chooseOpt => ', this.chooseOpt);
+    }
+    fetchSelectedValue(event) {
+      this.chooseOpt = event;
+      this.chooseOptName = event;
+      console.log('chooseOpt => ', this.chooseOpt);
     }
 }
